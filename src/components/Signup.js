@@ -73,18 +73,5 @@ export default function Signup() {
                 Already an Account? <Link to="/login">Log In</Link>
             </div>
         </>
-        // <div className='base'>
-        //     {error && <p>{error}</p> }
-        //     <form onSubmit={handleSubmit}>
-        //         <h3>Getmein</h3>
-        //         <input type='email' placeholder='Email' ref={email} />
-        //         <input type='password' placeholder='Password' ref={password} />
-        //         <input type='password' placeholder='Re-Enter Password' ref={repassword} />
-        //         <p>
-        //             Already have an Account? <Link className='cusLink' to='/login' > Log In </Link>
-        //         </p>
-        //         <button disabled={loading} type='submit' >Sign Up</button>
-        //     </form>
-        // </div>
     );
 }
