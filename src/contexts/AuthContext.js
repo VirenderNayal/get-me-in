@@ -9,30 +9,19 @@ export function useAuth() {
     return useContext(AuthContext);
 }
 
-export function AuthProvider({children}) {
+export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
+    const [loading, setLoading] = useState(true);
 
     function signup(email, password) {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredentials) => {
-                // Signed Up
-                return userCredentials.user;
-            }).catch((error) => {
-                return error.message;
-            })
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    function login(email, password){
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) => {
-            return userCredentials.user;
-        }).catch((error) => {
-            const msg = error.message;
-            return msg;
-        })
+    function login(email, password) {
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
-    function logout(){
+    function logout() {
         return signOut(auth);
     }
 
@@ -42,9 +31,8 @@ export function AuthProvider({children}) {
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setCurrentUser(user);
-            }
+            setCurrentUser(user);
+            setLoading(false);
         });
 
         return unsub;
@@ -61,7 +49,7 @@ export function AuthProvider({children}) {
 
     return (
         <AuthContext.Provider value={value} >
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     );
 }
